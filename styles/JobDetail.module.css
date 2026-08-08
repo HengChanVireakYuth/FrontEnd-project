@@ -1,0 +1,86 @@
+.back {
+  display: inline-block;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  max-width: 720px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+
+.company {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 16px 0;
+  margin-bottom: 24px;
+}
+
+.badge {
+  background: #eef2ff;
+  color: var(--color-primary);
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.subheading {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.description {
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.loginPrompt {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.loginPrompt a {
+  color: var(--color-primary);
+  font-weight: 600;
+}

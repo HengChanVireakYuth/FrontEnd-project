@@ -8,11 +8,11 @@ import JobCard from "../components/JobCard";
 import styles from "../styles/Home.module.css";
 
 const CATEGORIES = [
-  { name: "Engineering", icon: "💻" },
-  { name: "Design", icon: "🎨" },
-  { name: "Marketing", icon: "📣" },
-  { name: "Data", icon: "📊" },
-  { name: "Support", icon: "💬" },
+  { name: "Engineering", icon: "https://img.icons8.com/plasticine/1200/developer.jpg" },
+  { name: "Design", icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGcOYYFLcFh2HnjgBRw5qoApj5PK4yqH0QiWp4XgraPQ&s=10" },
+  { name: "Marketing", icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTlkVUKuXCrHbfX98ruBfENo-1KCXteUwYi9h2T8RGEA&s=10" },
+  { name: "Data", icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLi783iuguWoj70evkrtXmgpv5w01hvu6Xu9t9ITVy5g&s=10" },
+  { name: "Support", icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyCo-ufvf87AxaKmqPdKhTyPQV5F2Z9WcBqjCSApUfag&s=10" },
 ];
 
 export default function Home({ featuredJobs, jobCount, companyCount }) {
@@ -83,7 +83,7 @@ export default function Home({ featuredJobs, jobCount, companyCount }) {
               href={`/jobs?category=${encodeURIComponent(cat.name)}`}
               className={styles.categoryCard}
             >
-              <span className={styles.categoryIcon}>{cat.icon}</span>
+              <img src={cat.icon} alt={cat.name} className={styles.categoryIcon} />
               <span>{cat.name}</span>
             </a>
           ))}

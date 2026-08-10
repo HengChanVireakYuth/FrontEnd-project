@@ -101,7 +101,9 @@
 }
 
 .categoryIcon {
-  font-size: 26px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 .jobGrid {

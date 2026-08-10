@@ -20,6 +20,11 @@ export default function Navbar() {
         <div className={styles.actions}>
           {status === "loading" ? null : session ? (
             <>
+              {session.user.isAdmin && (
+                <Link href="/admin" className={styles.adminLink}>
+                  Admin
+                </Link>
+              )}
               <span className={styles.greeting}>Hi, {session.user.name}</span>
               <button
                 className="btn btn-outline"

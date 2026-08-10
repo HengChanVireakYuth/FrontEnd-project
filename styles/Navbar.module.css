@@ -46,6 +46,15 @@
   margin-right: 4px;
 }
 
+.adminLink {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
 @media (max-width: 640px) {
   .links {
     display: none;

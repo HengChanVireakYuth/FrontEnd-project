@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import dbConnect from "../../lib/mongodb";
@@ -8,6 +9,12 @@ import styles from "../../styles/JobDetail.module.css";
 
 export default function JobDetail({ job }) {
   const { data: session } = useSession();
+
+  const [message, setMessage] = useState("");
+  const [resumeUrl, setResumeUrl] = useState("");
+  const [applying, setApplying] = useState(false);
+  const [applied, setApplied] = useState(false);
+  const [error, setError] = useState("");
 
   if (!job) {
     return (
@@ -20,6 +27,33 @@ export default function JobDetail({ job }) {
         <Footer />
       </>
     );
+  }
+
+  async function handleApply(e) {
+    e.preventDefault();
+    setError("");
+    setApplying(true);
+
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jobId: job._id, message, resumeUrl }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Something went wrong");
+        setApplying(false);
+        return;
+      }
+
+      setApplied(true);
+      setApplying(false);
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+      setApplying(false);
+    }
   }
 
   return (
@@ -50,14 +84,50 @@ export default function JobDetail({ job }) {
           <h2 className={styles.subheading}>Job description</h2>
           <p className={styles.description}>{job.description}</p>
 
-          {session ? (
-            <button className="btn btn-primary">Apply now</button>
+          {!session ? (
+            <p className={styles.loginPrompt}>
+              <Link href="/login">Log in</Link> to apply for this job.
+            </p>
+          ) : applied ? (
+            <p className={styles.successMsg}>
+              ✓ Your application has been submitted. The employer will be in
+              touch if it's a match.
+            </p>
           ) : (
-            <div>
-              <p className={styles.loginPrompt}>
-                <Link href="/login">Log in</Link> to apply for this job.
-              </p>
-            </div>
+            <form className={styles.applyForm} onSubmit={handleApply}>
+              <h2 className={styles.subheading}>Apply for this job</h2>
+
+              {error && <p className={styles.error}>{error}</p>}
+
+              <label className={styles.label}>
+                Message to employer
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Tell them why you're a good fit..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </label>
+
+              <label className={styles.label}>
+                Resume link (optional)
+                <input
+                  type="url"
+                  placeholder="https://your-resume-link.com"
+                  value={resumeUrl}
+                  onChange={(e) => setResumeUrl(e.target.value)}
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={applying}
+              >
+                {applying ? "Submitting..." : "Submit application"}
+              </button>
+            </form>
           )}
         </div>
       </div>
